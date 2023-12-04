@@ -16,8 +16,8 @@ module.exports = {
 			},
 		},
 		extend: {
-			fontFamily: {
-				sans: ['var(--font-sans)', ...fontFamily.sans],
+			gridTemplateRows: {
+				'site-layout': 'auto 1fr auto',
 			},
 			colors: {
 				border: 'hsl(var(--border))',
