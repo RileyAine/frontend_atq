@@ -7,7 +7,6 @@ import {
 	navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
 import { Label } from '@/components/ui/label';
-import { ToastAction } from '@/components/ui/toast';
 import { useToast } from '@/components/ui/use-toast';
 import Link from 'next/link';
 
@@ -19,13 +18,13 @@ export default function Footer() {
 			links: [
 				{ title: 'Home', url: '/' },
 				{ title: 'Search', url: '/search' },
-				{ title: 'Confused?', url: '/gender-identities' },
+				{ title: '"Queer"', url: '/the-queer-word' },
 			],
 		},
 		{
 			title: 'Connect',
 			links: [
-				{ title: 'About Us', url: '' },
+				{ title: 'About', url: '/about' },
 				{ title: 'Contact', url: '' },
 				{ title: 'Contribute', url: '' },
 			],
@@ -38,7 +37,7 @@ export default function Footer() {
 			],
 		},
 		{
-			title: 'Follow Us',
+			title: 'Follow ' + (process.env.NODE_ENV === 'development' ? 'Us' : 'Me'),
 			links: [
 				{ title: 'Facebook', url: '' },
 				{ title: 'X', url: '' },
@@ -53,7 +52,9 @@ export default function Footer() {
 					<NavigationMenuList
 						className="grid"
 						key={header.title}>
-						<p className="grid justify-start text-2xl px-4">{header.title}</p>
+						<p className="grid justify-start text-lg md:text-2xl px-4">
+							{header.title}
+						</p>
 						{...header.links.map((link) => (
 							<div
 								key={link.title}
@@ -63,10 +64,9 @@ export default function Footer() {
 									onClick={() => {
 										if (link.url.length == 0) {
 											toast({
-												title: link.title + ' link not functional!',
+												title: link.title + ' link coming soon!',
 												description:
-													"This link isn't functional yet!  Sorry for the inconvenience!",
-												action: <ToastAction altText="Undo">Undo</ToastAction>,
+													"This link isn't functional yet!  We hope it will be working very soon!",
 											});
 										}
 									}}>
@@ -86,7 +86,11 @@ export default function Footer() {
 				))}
 			</NavigationMenu>
 			<Label className="grid copyright col-span-full justify-items-center py-2">
-				© 2023 {process.env.NEXT_PUBLIC_SITE_TITLE} All rights reserved.
+				© 2023{' '}
+				{process.env.NODE_ENV === 'development'
+					? process.env.NEXT_PUBLIC_SITE_TITLE
+					: process.env.NEXT_PUBLIC_SITE_TITLE_PROD}
+				. All rights reserved.
 			</Label>
 		</footer>
 	);

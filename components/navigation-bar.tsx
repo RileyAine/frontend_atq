@@ -8,12 +8,19 @@ import {
 import Link from 'next/link';
 
 export default function NavigationBar() {
-	const navLinks = [
-		{ title: 'Home', url: '/' },
-		{ title: 'About', url: '/about' },
-		{ title: 'Gender Identities', url: '/gender-identities' },
-		{ title: 'Sexual Orientations', url: '/sexual-orientations' },
-	];
+	const navLinks =
+		process.env.NODE_ENV === 'development'
+			? [
+					{ title: 'Home', url: '/' },
+					{ title: 'About', url: '/about' },
+					{ title: 'Gender Identities', url: '/gender-identities' },
+					{ title: 'Sexual Orientations', url: '/sexual-orientations' },
+			  ]
+			: [
+					{ title: 'Home', url: '/' },
+					{ title: 'About', url: '/about' },
+			  ];
+
 	return (
 		<NavigationMenu>
 			<NavigationMenuList>
@@ -23,7 +30,8 @@ export default function NavigationBar() {
 							href={navLink.url}
 							legacyBehavior
 							passHref>
-							<NavigationMenuLink className={navigationMenuTriggerStyle()}>
+							<NavigationMenuLink
+								className={navigationMenuTriggerStyle() + ' px-1'}>
 								{navLink.title}
 							</NavigationMenuLink>
 						</Link>
