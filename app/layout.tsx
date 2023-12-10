@@ -8,6 +8,7 @@ import Footer from '@/components/footer';
 import { ThemeProvider } from '@/components/theme-provider';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Toaster } from '@/components/ui/toaster';
+import { useState } from 'react';
 
 export const fontSans = FontSans({
 	subsets: ['latin'],

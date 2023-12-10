@@ -1,12 +1,11 @@
 'use client';
 
-import * as React from 'react';
+import { useState } from 'react';
 import { CheckIcon, CrossCircledIcon } from '@radix-ui/react-icons';
 
 import { cn } from '@/lib/utils';
 import {
 	Command,
-	CommandEmpty,
 	CommandGroup,
 	CommandInput,
 	CommandItem,
@@ -19,8 +18,9 @@ import {
 	TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { useRouter } from 'next/navigation';
+import { useToast } from './ui/use-toast';
 
-let sampleNames: {
+type resultData = {
 	extract: string;
 	index: number;
 	ns: number;
@@ -32,27 +32,18 @@ let sampleNames: {
 		width: number;
 	};
 	title: string;
-}[] = [];
-
-async function sampleSearch(value: string) {
-	const url = `
-	https://en.wikipedia.org/w/api.php?action=query&format=json&generator=search&exintro&exsentences=1&gsrlimit=10&gsrsearch=insource:/\{\{Birth_date_and_age/i%20${value}&pithumbsize=100&piprop=thumbnail&prop=pageimages|extracts&origin=*
-	`;
-	const apiResponse = await fetch(url + 'b');
-	const resJSON = await apiResponse.json();
-	// Assuming you have fetched and parsed the JSON response from the Wikipedia API
-	const searchResults = Object.values(resJSON.query.pages);
-	// Now, peopleResults contains only search results related to people (namespace 0)
-	return searchResults;
-}
+};
 
 export default function SearchBar() {
-	const [names, setNames] = React.useState(sampleNames);
-	const [value, setValue] = React.useState('');
+	const [names, setNames] = useState<resultData[]>();
+	const [value, setValue] = useState<string>();
+	const [isInputDisabled, setIsInputDisabled] = useState<boolean>(false);
 
 	const router = useRouter();
+	const { toast } = useToast();
 
 	async function fetchNames(e: string) {
+		setValue(e);
 		let trimVal = e.trim();
 		if (trimVal.length > 0) {
 			let apiResponse = await fetch(
@@ -61,42 +52,55 @@ export default function SearchBar() {
 					'&pithumbsize=100&pilimit=max&prop=pageimages%7Cextracts&origin=*'
 				)
 			);
-
-			const results = await apiResponse.json();
-			sampleNames = Object.values(results.query.pages);
 			if (!apiResponse.ok) throw Error(apiResponse.statusText);
-			setNames(sampleNames);
+
+			let results = await apiResponse.json();
+			try {
+				results = Object.values(results.query?.pages);
+			} catch (e) {
+				toast({
+					variant: 'destructive',
+					title: 'No results!',
+					description: "The current search doesn't return any names!",
+				});
+			}
+			setNames(results);
 			return results;
+		} else {
+			setNames(undefined);
 		}
 	}
 
 	function onSelectName(name: string, pageid: number) {
+		setIsInputDisabled(true);
 		setValue(name);
-		setNames([]);
+		setNames(undefined);
 		router.push('search?id=' + pageid);
 	}
 
 	function onClearName() {
-		setValue('');
-		setNames([]);
+		setIsInputDisabled(false);
+		setValue(undefined);
+		setNames(undefined);
 		router.push('/');
 	}
 
 	return (
-		<main className="grid grid-cols-3">
+		<main className="grid grid-flow-col">
 			<Label className="grid content-center justify-end p-2">
 				{process.env.NODE_ENV === 'development' ? 'Is' : 'Learn About: '}
 			</Label>
-			<Command className="grid static">
+			<Command className="grid static w-64 z-50">
 				<CommandInput
 					placeholder={
 						process.env.NODE_ENV === 'development' ? 'whomst' : 'Type a Name!'
 					}
 					value={value}
-					disabled={value.length > 0}
+					disabled={isInputDisabled}
 					onValueChange={(event) => fetchNames(event)}
+					className="grid"
 				/>
-				{value ? (
+				{isInputDisabled ? (
 					<TooltipProvider>
 						<Tooltip>
 							<TooltipTrigger
@@ -114,26 +118,30 @@ export default function SearchBar() {
 				) : (
 					''
 				)}
-				<CommandGroup className="grid absolute pt-10 bg-inherit">
-					{names.map((name) => (
-						<CommandItem
-							key={name.pageid}
-							value={name.title}
-							onSelect={() => {
-								onSelectName(name.title, name.pageid);
-							}}>
-							<CheckIcon
-								className={cn(
-									'mr-2 h-4 w-4',
-									value === name.title ? 'opacity-100' : 'opacity-0'
-								)}
-							/>
-							{name.title}
-						</CommandItem>
-					))}
-				</CommandGroup>
+				{names && (
+					<CommandGroup
+						className={cn(
+							'grid absolute top-60 justify-self-center z-50 bg-inherit'
+						)}>
+						{...names.map((name) => (
+							<CommandItem
+								key={name.pageid}
+								value={name.title}
+								onSelect={() => {
+									onSelectName(name.title, name.pageid);
+								}}>
+								<CheckIcon
+									className={cn(
+										'mr-2 h-4 w-4',
+										value === name.title ? 'opacity-100' : 'opacity-0'
+									)}
+								/>
+								{name.title}
+							</CommandItem>
+						))}
+					</CommandGroup>
+				)}
 			</Command>
-
 			<Label className="grid content-center justify-start p-2">
 				{process.env.NODE_ENV === 'development' && 'Queer?'}
 			</Label>

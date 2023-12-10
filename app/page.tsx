@@ -1,3 +1,4 @@
+'use client';
 import content_prod from './content.prod';
 import content_dev from './content.dev';
 
@@ -7,8 +8,9 @@ import { Separator } from '@/components/ui/separator';
 export default function Home() {
 	const content =
 		process.env.NODE_ENV === 'production' ? content_prod() : content_dev();
+
 	return (
-		<main className="content-main">
+		<main className="content-main animate-slideLeftEnter">
 			<Label className="grid text-3xl justify-self-center items-center border-b-2">
 				{content.PAGE_TITLE}
 			</Label>

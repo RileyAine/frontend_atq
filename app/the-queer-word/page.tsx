@@ -3,7 +3,7 @@ import { Separator } from '@/components/ui/separator';
 
 export default function Queer() {
 	return (
-		<main className="content-main">
+		<main className="content-main animate-slideLeftEnter">
 			<Label className="grid text-3xl justify-self-center items-center border-b-2">
 				Embracing the Term &quot;Queer&quot;
 			</Label>

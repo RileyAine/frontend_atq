@@ -18,7 +18,7 @@ export default function Footer() {
 			links: [
 				{ title: 'Home', url: '/' },
 				{ title: 'Search', url: '/search' },
-				{ title: '"Queer"', url: '/the-queer-word' },
+				// { title: '"Queer"', url: '/the-queer-word' },
 			],
 		},
 		{
