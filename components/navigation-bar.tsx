@@ -1,11 +1,10 @@
 import {
 	NavigationMenu,
 	NavigationMenuItem,
-	NavigationMenuLink,
 	NavigationMenuList,
-	navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
 import Link from 'next/link';
+import AnimatedNavigationMenuLink from './animatedNavigationMenuLink';
 
 export default function NavigationBar() {
 	const navLinks =
@@ -26,15 +25,9 @@ export default function NavigationBar() {
 			<NavigationMenuList>
 				{...navLinks.map((navLink, index) => (
 					<NavigationMenuItem key={index}>
-						<Link
-							href={navLink.url}
-							legacyBehavior
-							passHref>
-							<NavigationMenuLink
-								className={navigationMenuTriggerStyle() + ' px-1'}>
-								{navLink.title}
-							</NavigationMenuLink>
-						</Link>
+						<AnimatedNavigationMenuLink href={navLink.url}>
+							{navLink.title}
+						</AnimatedNavigationMenuLink>
 					</NavigationMenuItem>
 				))}
 			</NavigationMenuList>

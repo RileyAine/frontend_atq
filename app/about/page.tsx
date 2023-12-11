@@ -10,7 +10,7 @@ export default function About() {
 		process.env.NODE_ENV === 'production' ? content_prod() : content_dev();
 
 	return (
-		<main className="content-main animate-slideLeftEnter">
+		<main className="content-main">
 			<Label className="grid text-3xl justify-self-center items-center border-b-2">
 				{content.PAGE_TITLE}
 			</Label>

@@ -69,21 +69,21 @@ module.exports = {
 					to: { height: 0 },
 				},
 				slideLeftEnter: {
-					'0%': {
+					from: {
 						opacity: 0,
 						transform: 'translateX(20px)',
 					},
-					'100%': {
-						opacity: 100,
+					to: {
+						opacity: 1,
 						transform: 'translateX(0px)',
 					},
 				},
 				slideLeftLeave: {
-					'0%': {
-						opacity: 100,
+					from: {
+						opacity: 1,
 						transform: 'translateX(0px)',
 					},
-					'100%': {
+					to: {
 						opacity: 0,
 						transform: 'translateX(-20px)',
 					},

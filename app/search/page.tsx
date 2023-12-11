@@ -7,7 +7,7 @@ import { useSearchParams } from 'next/navigation';
 
 import { Skeleton } from '@/components/ui/skeleton';
 import Image from 'next/image';
-import useCharacterData from '@/lib/useCharacterData';
+import useCharacterData from '@/lib/hooks/useCharacterData';
 
 export default function CharacterSheet() {
 	const searchParams = useSearchParams()!;
@@ -17,7 +17,7 @@ export default function CharacterSheet() {
 
 	if (isLoading) {
 		return (
-			<main className="content-main animate-slideLeftEnter">
+			<main className="content-main">
 				<Card>
 					<CardHeader>
 						<CardTitle>
@@ -49,7 +49,7 @@ export default function CharacterSheet() {
 	if (data) {
 		const character = Object.values(data)[0];
 		return (
-			<main className="content-main animate-slideLeftEnter">
+			<main className="content-main">
 				<Card>
 					<CardHeader className="grid justify-items-center">
 						<CardTitle>

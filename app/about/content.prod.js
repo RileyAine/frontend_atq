@@ -9,7 +9,7 @@ export default function content_prod() {
 				],
 			},
 			{
-				SECTION_TITLE: "Enterprise Medical Systems LLC Oct '23 - Nov '23)",
+				SECTION_TITLE: "Enterprise Medical Systems LLC (Oct '23 - Nov '23)",
 				PARAGRAPHS: [
 					'I played a key role in enhancing project understanding at Enterprise Medical Systems. From creating detailed technical documentation to leading strategic project planning, I ensured a smooth development process.',
 				],

@@ -2,22 +2,37 @@
 import {
 	NavigationMenu,
 	NavigationMenuItem,
-	NavigationMenuLink,
 	NavigationMenuList,
-	navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/components/ui/use-toast';
-import Link from 'next/link';
+import AnimatedNavigationMenuLink from './animatedNavigationMenuLink';
 
 export default function Footer() {
 	const { toast } = useToast();
+	let follow;
+	process.env.NODE_ENV === 'development'
+		? (follow = {
+				title: 'Follow Us',
+				links: [
+					{ title: 'Facebook', url: '' },
+					{ title: 'X', url: '' },
+					{ title: 'Instagram', url: '' },
+				],
+		  })
+		: (follow = {
+				title: 'Follow Me',
+				links: [
+					{ title: 'LinkedIn', url: 'https://linkedin.com/in/riley-wilkes' },
+					{ title: 'Github', url: 'https://github.com/RileyAine/frontend_atq' },
+				],
+		  });
 	const footerHeaders = [
 		{
 			title: 'Explore',
 			links: [
 				{ title: 'Home', url: '/' },
-				{ title: 'Search', url: '/search' },
+				{ title: 'Search', url: '' },
 				// { title: '"Queer"', url: '/the-queer-word' },
 			],
 		},
@@ -36,17 +51,10 @@ export default function Footer() {
 				{ title: 'Terms of Service', url: '' },
 			],
 		},
-		{
-			title: 'Follow ' + (process.env.NODE_ENV === 'development' ? 'Us' : 'Me'),
-			links: [
-				{ title: 'Facebook', url: '' },
-				{ title: 'X', url: '' },
-				{ title: 'Instagram', url: '' },
-			],
-		},
+		follow,
 	];
 	return (
-		<footer className="grid auto-cols-auto items-start justify-center border-y-2 p-2">
+		<footer className="grid auto-cols-auto items-start justify-center border-y-2 p-2 bg-inherit z-45">
 			<NavigationMenu className="items-start gap-2">
 				{...footerHeaders.map((header) => (
 					<NavigationMenuList
@@ -70,15 +78,9 @@ export default function Footer() {
 											});
 										}
 									}}>
-									<Link
-										href={link.url}
-										legacyBehavior
-										passHref>
-										<NavigationMenuLink
-											className={navigationMenuTriggerStyle()}>
-											{link.title}
-										</NavigationMenuLink>
-									</Link>
+									<AnimatedNavigationMenuLink href={link.url}>
+										{link.title}
+									</AnimatedNavigationMenuLink>
 								</NavigationMenuItem>
 							</div>
 						))}

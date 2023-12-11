@@ -17,8 +17,8 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { useRouter } from 'next/navigation';
 import { useToast } from './ui/use-toast';
+import useAnimatedRouter from '@/lib/hooks/useAnimatedRouter';
 
 type resultData = {
 	extract: string;
@@ -38,8 +38,7 @@ export default function SearchBar() {
 	const [names, setNames] = useState<resultData[]>();
 	const [value, setValue] = useState<string>();
 	const [isInputDisabled, setIsInputDisabled] = useState<boolean>(false);
-
-	const router = useRouter();
+	const animatedRouter = useAnimatedRouter();
 	const { toast } = useToast();
 
 	async function fetchNames(e: string) {
@@ -67,6 +66,7 @@ export default function SearchBar() {
 			setNames(results);
 			return results;
 		} else {
+			setValue('');
 			setNames(undefined);
 		}
 	}
@@ -75,14 +75,14 @@ export default function SearchBar() {
 		setIsInputDisabled(true);
 		setValue(name);
 		setNames(undefined);
-		router.push('search?id=' + pageid);
+		animatedRouter.animatedRoute('search?id=' + pageid);
 	}
 
 	function onClearName() {
 		setIsInputDisabled(false);
-		setValue(undefined);
+		setValue('');
 		setNames(undefined);
-		router.push('/');
+		animatedRouter.animatedRoute('/');
 	}
 
 	return (

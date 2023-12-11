@@ -3,7 +3,7 @@ import { Separator } from '@/components/ui/separator';
 
 export default function SexualOrientations() {
 	return (
-		<main className="content-main animate-slideLeftEnter">
+		<main className="content-main">
 			<Label className="grid text-3xl justify-self-center items-center border-b-2">
 				Understanding Sexual Orientations
 			</Label>
