@@ -1,4 +1,4 @@
-export default function content_dev() {
+export default function content() {
 	return {
 		PAGE_TITLE: '',
 		SECTIONS: [

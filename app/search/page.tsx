@@ -1,5 +1,4 @@
-'use client';
-
+// Import necessary dependencies and components
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -9,12 +8,14 @@ import { Skeleton } from '@/components/ui/skeleton';
 import Image from 'next/image';
 import useCharacterData from '@/lib/hooks/useCharacterData';
 
+// CharacterSheet component to display character data
 export default function CharacterSheet() {
 	const searchParams = useSearchParams()!;
 	// id will be a number or it will be NaN
 	const id = Number(searchParams.get('id'));
 	const { data, isLoading, isError } = useCharacterData(id);
 
+	// Loading state: Display skeleton components while data is loading
 	if (isLoading) {
 		return (
 			<main className="content-main">
@@ -42,10 +43,12 @@ export default function CharacterSheet() {
 		);
 	}
 
+	// Error state: Display an error message if there's an issue loading data
 	if (isError) {
 		return <div>Error loading character data</div>;
 	}
 
+	// Data loaded state: Display character details
 	if (data) {
 		const character = Object.values(data)[0];
 		return (
@@ -57,6 +60,7 @@ export default function CharacterSheet() {
 						</CardTitle>
 					</CardHeader>
 					<CardContent className="space-x-4 relative px-8">
+						{/* Display character thumbnail if available */}
 						{character.thumbnail && (
 							<Image
 								className="grid justify-self-center pr-4 float-left"
@@ -65,7 +69,8 @@ export default function CharacterSheet() {
 								alt={'Picture of ' + character.title}
 								src={character.thumbnail?.source}></Image>
 						)}
-						{...character.extract.split('\n').map((para: string, i: number) => (
+						{/* Display character extract split into paragraphs */}
+						{character.extract.split('\n').map((para: string, i: number) => (
 							<span key={i}>
 								{para}
 								<br />

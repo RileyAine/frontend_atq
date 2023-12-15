@@ -1,9 +1,11 @@
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 
+// SexualOrientations component to provide information about sexual orientations
 export default function SexualOrientations() {
 	return (
 		<main className="content-main">
+			{/* Section about Understanding Sexual Orientations */}
 			<Label className="grid text-3xl justify-self-center items-center border-b-2">
 				Understanding Sexual Orientations
 			</Label>
@@ -15,6 +17,8 @@ export default function SexualOrientations() {
 				</p>
 			</section>
 			<Separator />
+
+			{/* Section about Common Sexual Orientations */}
 			<section className="content-section">
 				<Label className="grid text-2xl justify-self-center">
 					Common Sexual Orientations
@@ -43,6 +47,8 @@ export default function SexualOrientations() {
 				</p>
 			</section>
 			<Separator />
+
+			{/* Section about Respecting Identities */}
 			<section className="content-section">
 				<Label className="grid text-2xl justify-self-center">
 					Respecting Identities
@@ -54,6 +60,8 @@ export default function SexualOrientations() {
 				</p>
 			</section>
 			<Separator />
+
+			{/* Section about Further Exploration */}
 			<section className="content-section">
 				<Label className="grid text-2xl justify-self-center">
 					Further Exploration

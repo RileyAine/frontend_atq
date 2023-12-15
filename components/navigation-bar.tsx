@@ -1,3 +1,4 @@
+// Import necessary components and utilities
 import {
 	NavigationMenu,
 	NavigationMenuItem,
@@ -5,16 +6,20 @@ import {
 } from '@/components/ui/navigation-menu';
 import AnimatedNavigationMenuLink from './animatedNavigationMenuLink';
 
-type navLink = { title: string; url: string };
+// Define type for navigation link
+type NavLink = { title: string; url: string };
 
-export default function NavigationBar({ navLinks }: { navLinks: navLink[] }) {
+// Define functional component for the NavigationBar
+export default function NavigationBar({ navLinks }: { navLinks: NavLink[] }) {
 	return (
-		<NavigationMenu className="w-screen">
+		// NavigationMenu component for styling
+		<NavigationMenu>
+			{/* NavigationMenuList to contain the NavigationMenuItems */}
 			<NavigationMenuList>
-				{...navLinks.map((navLink, index) => (
-					<NavigationMenuItem
-						key={index}
-						className="grid">
+				{/* Map through provided navLinks to create NavigationMenuItems */}
+				{navLinks.map((navLink, index) => (
+					<NavigationMenuItem key={index}>
+						{/* AnimatedNavigationMenuLink with href and title */}
 						<AnimatedNavigationMenuLink href={navLink.url}>
 							{navLink.title}
 						</AnimatedNavigationMenuLink>

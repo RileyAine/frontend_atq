@@ -36,7 +36,7 @@ Deployment of the project is handled through Docker Hub. Follow these steps to d
 
 3. Run the deployment script with the desired version as an argument:
    ```bash
-   ./docker_push.ps1 -Version 1.0.0
+   ./docker_push.ps1  v#.#.#
    ```
 
 This script builds the production-ready version, creates a Docker container image, and pushes it to Docker Hub at `rileysaur/frontend_atq`.
