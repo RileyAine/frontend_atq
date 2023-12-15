@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Are They Queer
+
+Welcome to the Are They Queer project! This Next.js project is a React application with TypeScript and Tailwind CSS, utilizing Shadcn-UI components, Google Font "Dongle," and Radix-UI icons.
 
 ## Getting Started
 
-First, run the development server:
+To run the development environment, follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Clone the repository:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+   ```bash
+   git clone https://github.com/RileyAine/are-they-queer.git
+   cd are-they-queer
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. Install dependencies:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+   ```bash
+   npm install
+   ```
 
-## Learn More
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+Visit [http://localhost:3000](http://localhost:3000) in your browser to see the application in action.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Deployment of the project is handled through Docker Hub. Follow these steps to deploy:
 
-## Deploy on Vercel
+1. Ensure you have Docker installed on your machine.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. Create a `.env` file in the project root and set the appropriate environment variables, if needed.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+3. Run the deployment script with the desired version as an argument:
+   ```bash
+   ./docker_push.ps1 -Version 1.0.0
+   ```
+
+This script builds the production-ready version, creates a Docker container image, and pushes it to Docker Hub at `rileysaur/frontend_atq`.
+
+## Technologies Used
+
+- Next.js
+- React with TypeScript
+- Tailwind CSS
+- Shadcn-UI components
+- Google Font "Dongle"
+- Radix-UI icons
+
+## Credits
+
+- Shadcn-UI: [Link to Shadcn-UI](https://ui.shadcn.com/)
+- Google Fonts: [Link to Dongle](https://fonts.google.com/specimen/Dongle)
+- Radix-UI Icons: [Link to Radix-UI Icons](https://icons.radix-ui.com)
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
