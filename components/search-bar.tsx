@@ -120,15 +120,13 @@ export default function SearchBar() {
 	return (
 		<main className="grid grid-flow-col">
 			{/* Label for the SearchBar */}
-			<Label className="grid content-center justify-end p-2">
-				Learn About:
-			</Label>
+			<Label className="grid content-center justify-end p-2">Is</Label>
 
 			{/* Command component for the SearchBar */}
 			<Command className="grid static w-64 z-50">
 				{/* CommandInput for the SearchBar */}
 				<CommandInput
-					placeholder="Type a Name!"
+					placeholder="whomst"
 					value={value}
 					disabled={isInputDisabled}
 					onValueChange={(event) => fetchNames(event)}
@@ -181,6 +179,7 @@ export default function SearchBar() {
 					</CommandGroup>
 				)}
 			</Command>
+			<Label className="grid content-center justify-start p-2">Queer?</Label>
 		</main>
 	);
 }
