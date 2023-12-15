@@ -18,6 +18,7 @@ module.exports = {
 		extend: {
 			gridTemplateRows: {
 				'site-layout': 'auto 1fr auto',
+				'mobile-layout': 'auto 1fr 0',
 			},
 			colors: {
 				border: 'hsl(var(--border))',

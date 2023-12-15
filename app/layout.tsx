@@ -39,12 +39,12 @@ export default function RootLayout({
 					defaultTheme="system"
 					enableSystem
 					disableTransitionOnChange>
-					<div className="grid grid-rows-site-layout h-screen">
+					<div className="grid grid-rows-mobile-layout md:grid-rows-site-layout h-screen w-screen">
 						<div className="grid">
 							<Header />
 						</div>
-						<ScrollArea className="grid items-start justify-self-center p-4 w-11/12 md:w-9/12 lg:w-7/12 xl:w-6/12 pageContentAnimation">
-							<div className="grid">{children}</div>
+						<ScrollArea className="grid md:w-10/12 lg:w-8/12 xl:w-6/12 items-start justify-self-center pageContentAnimation">
+							<div className="grid p-4 justify-self-center">{children}</div>
 						</ScrollArea>
 						<div className="grid">
 							<Footer />

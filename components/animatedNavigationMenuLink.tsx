@@ -6,6 +6,7 @@ import {
 	navigationMenuTriggerStyle,
 } from './ui/navigation-menu';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 
 type Props = {
 	href: string;
@@ -19,7 +20,7 @@ export default function AnimatedNavigationMenuLink({ href, children }: Props) {
 			legacyBehavior
 			href={href}>
 			<NavigationMenuLink
-				className={navigationMenuTriggerStyle() + ' px-1'}
+				className={cn(navigationMenuTriggerStyle(), 'px-2')}
 				onClick={() => {
 					href.length > 0 && animatedRoute(href);
 				}}>

@@ -10,30 +10,13 @@ import AnimatedNavigationMenuLink from './animatedNavigationMenuLink';
 
 export default function Footer() {
 	const { toast } = useToast();
-	let follow;
-	process.env.NODE_ENV === 'development'
-		? (follow = {
-				title: 'Follow Us',
-				links: [
-					{ title: 'Facebook', url: '' },
-					{ title: 'X', url: '' },
-					{ title: 'Instagram', url: '' },
-				],
-		  })
-		: (follow = {
-				title: 'Follow Me',
-				links: [
-					{ title: 'LinkedIn', url: 'https://linkedin.com/in/riley-wilkes' },
-					{ title: 'Github', url: 'https://github.com/RileyAine/frontend_atq' },
-				],
-		  });
 	const footerHeaders = [
 		{
 			title: 'Explore',
 			links: [
 				{ title: 'Home', url: '/' },
 				{ title: 'Search', url: '' },
-				// { title: '"Queer"', url: '/the-queer-word' },
+				{ title: '"Queer"', url: '/the-queer-word' },
 			],
 		},
 		{
@@ -51,22 +34,29 @@ export default function Footer() {
 				{ title: 'Terms of Service', url: '' },
 			],
 		},
-		follow,
+		{
+			title: 'Follow',
+			links: [
+				{ title: 'Facebook', url: '' },
+				{ title: 'X', url: '' },
+				{ title: 'Instagram', url: '' },
+			],
+		},
 	];
 	return (
-		<footer className="grid auto-cols-auto items-start justify-center border-y-2 p-2 bg-inherit z-45">
-			<NavigationMenu className="items-start gap-2">
+		<footer className="grid items-start justify-center border-y-2 py-2 bg-inherit z-45 w-screen">
+			<NavigationMenu className="items-start md:gap-2">
 				{...footerHeaders.map((header) => (
 					<NavigationMenuList
 						className="grid"
 						key={header.title}>
-						<p className="grid justify-start text-lg md:text-2xl px-4">
+						<p className="grid justify-start text-md md:text-2xl px-2 md:px-4">
 							{header.title}
 						</p>
 						{...header.links.map((link) => (
 							<div
 								key={link.title}
-								className="grid justify-start items-center">
+								className="grid justify-items-start items-center">
 								<NavigationMenuItem
 									key={link.title}
 									onClick={() => {
@@ -88,11 +78,7 @@ export default function Footer() {
 				))}
 			</NavigationMenu>
 			<Label className="grid copyright col-span-full justify-items-center py-2">
-				© 2023{' '}
-				{process.env.NODE_ENV === 'development'
-					? process.env.NEXT_PUBLIC_SITE_TITLE
-					: process.env.NEXT_PUBLIC_SITE_TITLE_PROD}
-				. All rights reserved.
+				© 2023 {process.env.NEXT_PUBLIC_SITE_TITLE}. All rights reserved.
 			</Label>
 		</footer>
 	);
